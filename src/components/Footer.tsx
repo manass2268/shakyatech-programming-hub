@@ -83,7 +83,12 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-lg">📞</span>
-                <span>+91 70076 27081</span>
+                <a 
+                  href="tel:+917007627081" 
+                  className="hover:text-yellow-400 transition cursor-pointer"
+                >
+                  +91 70076 27081
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <span className="text-lg">✉️</span>
@@ -98,7 +103,15 @@ export default function Footer() {
                 <span className="text-lg">🕒</span>
                 <span className="leading-relaxed">
                   <span className="text-white font-semibold">Call:</span> 5:00 PM - 9:00 PM<br />
-                  <span className="text-white font-semibold">WhatsApp:</span> 24/7 Available
+                  <span className="text-white font-semibold">WhatsApp:</span>{' '}
+                  <a 
+                    href="https://wa.me/917007627081" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hover:text-yellow-400 transition cursor-pointer font-bold underline decoration-yellow-500/50 underline-offset-2"
+                  >
+                    24/7 Available (Click to chat)
+                  </a>
                 </span>
               </li>
             </ul>
