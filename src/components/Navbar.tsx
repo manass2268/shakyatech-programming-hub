@@ -2,13 +2,19 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Helper function to check if the current link is active
+  const isActive = (path: string) => pathname === path;
 
   return (
     <div className="w-full font-sans shadow-md relative">
-      {/* Top Bar */}
+      
+      {/* Top Bar (Preserved) */}
       <div className="hidden bg-[#081839] text-gray-300 text-[11px] py-2">
         <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
           <div className="flex gap-3 items-center">
@@ -24,10 +30,10 @@ export default function Navbar() {
       </div>
 
       {/* Main Header */}
-      <header className="bg-white sticky top-0 z-50 w-full overflow-hidden">
+      <header className="bg-white sticky top-0 z-50 w-full overflow-visible">
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 lg:py-4 flex justify-between items-center">
           
-          {/* Logo Section (Hover Scale Animation) */}
+          {/* Logo Section */}
           <Link href="/" className="flex items-center gap-2 lg:gap-3 flex-shrink-0 flex-1 justify-start group cursor-pointer">
             <div className="w-10 h-10 sm:w-12 sm:h-12 relative flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
               <Image 
@@ -52,52 +58,78 @@ export default function Navbar() {
             </div>
           </Link>
           
-          {/* Desktop Navigation (Underline Slide Animation) */}
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center justify-center space-x-5 xl:space-x-8 text-[14px] xl:text-[15px] font-bold text-[#081839] flex-shrink-0">
-            <Link href="/" className="relative group whitespace-nowrap py-1">
+            
+            {/* Home Link */}
+            <Link href="/" className={`relative group whitespace-nowrap py-1 ${isActive('/') ? 'text-blue-600' : ''}`}>
               <span className="group-hover:text-blue-600 transition-colors duration-300">Home</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out group-hover:w-full"></span>
+              <span className={`absolute bottom-0 left-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out ${isActive('/') ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
             </Link>
             
-            <Link href="/about" className="relative group whitespace-nowrap py-1">
+            {/* About Us Link */}
+            <Link href="/about" className={`relative group whitespace-nowrap py-1 ${isActive('/about') ? 'text-blue-600' : ''}`}>
               <span className="group-hover:text-blue-600 transition-colors duration-300">About Us</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out group-hover:w-full"></span>
+              <span className={`absolute bottom-0 left-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out ${isActive('/about') ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
             </Link>
 
-            <a href="#" className="relative group whitespace-nowrap py-1">
-              <span className="group-hover:text-blue-600 transition-colors duration-300">Courses ▾</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out group-hover:w-full"></span>
-            </a>
+            {/* Courses Dropdown */}
+            <div className="relative group py-1">
+              <button className="flex items-center gap-1 group-hover:text-blue-600 transition-colors duration-300">
+                Courses <span className="text-[10px] transition-transform duration-300 group-hover:rotate-180">▼</span>
+              </button>
+              {/* Dropdown Box */}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-white border border-gray-100 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.1)] rounded-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                <Link href="/courses/c" className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">C Programming</Link>
+                <Link href="/courses/cpp" className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">C++ Programming</Link>
+                <Link href="/courses/java" className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Java Programming</Link>
+                <Link href="/courses/python" className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Python</Link>
+                <Link href="/courses/web" className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Web Development</Link>
+              </div>
+            </div>
 
-            <a href="#" className="relative group whitespace-nowrap py-1">
-              <span className="group-hover:text-blue-600 transition-colors duration-300">Learning Modes ▾</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out group-hover:w-full"></span>
-            </a>
+            {/* Learning Modes Dropdown */}
+            <div className="relative group py-1">
+              <button className="flex items-center gap-1 group-hover:text-blue-600 transition-colors duration-300">
+                Learning Modes <span className="text-[10px] transition-transform duration-300 group-hover:rotate-180">▼</span>
+              </button>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-40 bg-white border border-gray-100 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.1)] rounded-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                <Link href="/modes/online" className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Online Mode</Link>
+                <Link href="/modes/offline" className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Offline Mode</Link>
+                <Link href="/modes/hybrid" className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Hybrid Mode</Link>
+              </div>
+            </div>
 
-            <a href="#" className="relative group whitespace-nowrap py-1">
-              <span className="group-hover:text-blue-600 transition-colors duration-300">Admissions ▾</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out group-hover:w-full"></span>
-            </a>
+            {/* Admissions Dropdown */}
+            <div className="relative group py-1">
+              <button className="flex items-center gap-1 group-hover:text-blue-600 transition-colors duration-300">
+                Admissions <span className="text-[10px] transition-transform duration-300 group-hover:rotate-180">▼</span>
+              </button>
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-44 bg-white border border-gray-100 shadow-[0_10px_25px_-5px_rgba(0,0,0,0.1)] rounded-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                <Link href="/admissions/apply" className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Apply Now</Link>
+                <Link href="/admissions/process" className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">Admission Process</Link>
+                <Link href="/admissions/faqs" className="block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-600">FAQs</Link>
+              </div>
+            </div>
 
-            <a href="#" className="relative group whitespace-nowrap py-1">
+            <Link href="/fees" className={`relative group whitespace-nowrap py-1 ${isActive('/fees') ? 'text-blue-600' : ''}`}>
               <span className="group-hover:text-blue-600 transition-colors duration-300">Fees</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out group-hover:w-full"></span>
-            </a>
+              <span className={`absolute bottom-0 left-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out ${isActive('/fees') ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+            </Link>
 
-            <a href="#" className="relative group whitespace-nowrap py-1">
+            <Link href="/contact" className={`relative group whitespace-nowrap py-1 ${isActive('/contact') ? 'text-blue-600' : ''}`}>
               <span className="group-hover:text-blue-600 transition-colors duration-300">Contact Us</span>
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out group-hover:w-full"></span>
-            </a>
+              <span className={`absolute bottom-0 left-0 h-0.5 bg-blue-600 transition-all duration-300 ease-out ${isActive('/contact') ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+            </Link>
+            
           </nav>
 
           {/* Action Buttons */}
           <div className="flex items-center justify-end gap-3 flex-shrink-0 flex-1">
-            {/* 3D Lift Button Effect */}
             <button className="hidden sm:block bg-[#081839] hover:bg-blue-800 text-white px-5 xl:px-7 py-2.5 rounded font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm text-sm whitespace-nowrap">
               Apply Now
             </button>
             
-            {/* Hamburger Menu Spin Animation */}
             <button 
               className="lg:hidden text-[#081839] text-2xl focus:outline-none hover:rotate-90 transition-transform duration-300 ease-in-out"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -108,21 +140,19 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Menu (Slide & Fade in effect) */}
+      {/* Mobile Menu */}
       <div 
         className={`lg:hidden absolute top-full left-0 w-full bg-white border-t border-gray-200 shadow-xl z-40 flex flex-col transition-all duration-300 origin-top overflow-hidden ${
           isMobileMenuOpen ? 'max-h-96 opacity-100 scale-y-100' : 'max-h-0 opacity-0 scale-y-0'
         }`}
       >
         <nav className="flex flex-col px-6 py-4 space-y-2 text-sm font-bold text-[#081839]">
-          {/* Mobile Links Hover Slide Effect */}
-          <Link href="/" className="hover:text-blue-600 hover:translate-x-2 transition-all duration-300 py-2 border-b border-gray-50 flex w-full">Home</Link>
-          <Link href="/about" className="hover:text-blue-600 hover:translate-x-2 transition-all duration-300 py-2 border-b border-gray-50 flex w-full">About Us</Link>
-          <a href="#" className="hover:text-blue-600 hover:translate-x-2 transition-all duration-300 py-2 border-b border-gray-50 flex w-full">Courses ▾</a>
-          <a href="#" className="hover:text-blue-600 hover:translate-x-2 transition-all duration-300 py-2 border-b border-gray-50 flex w-full">Learning Modes ▾</a>
-          <a href="#" className="hover:text-blue-600 hover:translate-x-2 transition-all duration-300 py-2 border-b border-gray-50 flex w-full">Admissions ▾</a>
-          <a href="#" className="hover:text-blue-600 hover:translate-x-2 transition-all duration-300 py-2 border-b border-gray-50 flex w-full">Fees</a>
-          <a href="#" className="hover:text-blue-600 hover:translate-x-2 transition-all duration-300 py-2 flex w-full">Contact Us</a>
+          <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className={`hover:text-blue-600 transition-all duration-300 py-2 border-b border-gray-50 flex w-full ${isActive('/') ? 'text-blue-600 translate-x-2' : 'hover:translate-x-2'}`}>Home</Link>
+          <Link href="/about" onClick={() => setIsMobileMenuOpen(false)} className={`hover:text-blue-600 transition-all duration-300 py-2 border-b border-gray-50 flex w-full ${isActive('/about') ? 'text-blue-600 translate-x-2' : 'hover:translate-x-2'}`}>About Us</Link>
+          <div className="py-2 border-b border-gray-50 text-gray-500">Courses (Available on Desktop)</div>
+          <div className="py-2 border-b border-gray-50 text-gray-500">Admissions (Available on Desktop)</div>
+          <Link href="/fees" onClick={() => setIsMobileMenuOpen(false)} className={`hover:text-blue-600 transition-all duration-300 py-2 border-b border-gray-50 flex w-full ${isActive('/fees') ? 'text-blue-600 translate-x-2' : 'hover:translate-x-2'}`}>Fees</Link>
+          <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)} className={`hover:text-blue-600 transition-all duration-300 py-2 flex w-full ${isActive('/contact') ? 'text-blue-600 translate-x-2' : 'hover:translate-x-2'}`}>Contact Us</Link>
           
           <button className="bg-[#081839] hover:bg-blue-800 text-white py-3 rounded font-semibold shadow-md mt-4 w-full sm:hidden transition-colors duration-300">
             Apply Now
