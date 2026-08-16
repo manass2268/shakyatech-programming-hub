@@ -24,11 +24,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    /* html par overflow-x-hidden lagaya hai taaki base level par hi horizontal scroll block ho jaye */
+    <html lang="en" suppressHydrationWarning className="max-w-[100vw] overflow-x-hidden">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[100vw] overflow-x-hidden w-full m-0 p-0`}
       >
-        {children}
+        {/* THE MASTER WRAPPER: Yeh div poori website ke har page ko frame ke andar lock karke rakhega */}
+        <div className="flex flex-col min-h-screen w-full max-w-[100vw] overflow-x-hidden">
+          {children}
+        </div>
       </body>
     </html>
   );

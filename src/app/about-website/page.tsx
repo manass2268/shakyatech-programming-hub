@@ -169,48 +169,61 @@ export default function AboutWebsite() {
           </div>
         </section>
 
-        {/* TECH STACK */}
-        <section className="py-12 bg-white border-y border-gray-100">
+        {/* TECH STACK (Updated Colorful Version) */}
+        <section className="py-16 bg-white border-y border-gray-100 relative overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-48 bg-blue-50/50 rounded-full blur-3xl -z-10"></div>
+          
           <div className="container mx-auto px-4 max-w-7xl text-center">
-            <h3 className="text-xl font-bold text-[#081839] mb-2">Technology Behind the Platform</h3>
-            <p className="text-sm text-gray-500 mb-8">Modern technologies used to ensure a fast, secure, scalable and best-in-class user experience.</p>
+            <h3 className="text-2xl font-extrabold text-[#081839] mb-3">Technology Behind the Platform</h3>
+            <p className="text-gray-500 mb-12 max-w-2xl mx-auto">Engineered using modern, industry-standard technologies to ensure a fast, secure, scalable, and premium user experience.</p>
             
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white font-bold text-xl border border-gray-300">N</div>
-                <span className="text-xs font-semibold text-gray-800">Next.js</span>
+            <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+              
+              <div className="group flex flex-col items-center gap-3 p-4 w-32 rounded-2xl hover:bg-white hover:shadow-xl hover:shadow-black/5 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-gray-100">
+                <div className="w-14 h-14 bg-black rounded-full flex items-center justify-center text-white font-bold text-2xl shadow-md group-hover:scale-110 transition-transform duration-300">N</div>
+                <span className="text-sm font-semibold text-gray-700 group-hover:text-black transition-colors">Next.js</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
-                <svg className="w-10 h-10 text-[#61DAFB]" viewBox="0 0 118 103" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M59 28C41.9 28 28 41.9 28 59C28 76.1 41.9 90 59 90C76.1 90 90 76.1 90 59C90 41.9 76.1 28 59 28ZM59 82C46.3 82 36 71.7 36 59C36 46.3 46.3 36 59 36C71.7 36 82 46.3 82 59C82 71.7 71.7 82 59 82Z" fill="currentColor"/>
-                  <ellipse cx="59" cy="51.5" rx="35.5" ry="14" transform="rotate(30 59 51.5)" stroke="currentColor" strokeWidth="6"/>
-                  <ellipse cx="59" cy="51.5" rx="35.5" ry="14" transform="rotate(90 59 51.5)" stroke="currentColor" strokeWidth="6"/>
-                  <ellipse cx="59" cy="51.5" rx="35.5" ry="14" transform="rotate(150 59 51.5)" stroke="currentColor" strokeWidth="6"/>
-                </svg>
-                <span className="text-xs font-semibold text-gray-800">React</span>
+
+              <div className="group flex flex-col items-center gap-3 p-4 w-32 rounded-2xl hover:bg-white hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-cyan-50">
+                <div className="w-14 h-14 flex items-center justify-center text-[#61DAFB] group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(97,218,251,0.5)] transition-all duration-300">
+                  <svg viewBox="0 0 118 103" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                    <path d="M59 28C41.9 28 28 41.9 28 59C28 76.1 41.9 90 59 90C76.1 90 90 76.1 90 59C90 41.9 76.1 28 59 28ZM59 82C46.3 82 36 71.7 36 59C36 46.3 46.3 36 59 36C71.7 36 82 46.3 82 59C82 71.7 71.7 82 59 82Z" fill="currentColor"/>
+                    <ellipse cx="59" cy="51.5" rx="35.5" ry="14" transform="rotate(30 59 51.5)" stroke="currentColor" strokeWidth="6"/>
+                    <ellipse cx="59" cy="51.5" rx="35.5" ry="14" transform="rotate(90 59 51.5)" stroke="currentColor" strokeWidth="6"/>
+                    <ellipse cx="59" cy="51.5" rx="35.5" ry="14" transform="rotate(150 59 51.5)" stroke="currentColor" strokeWidth="6"/>
+                  </svg>
+                </div>
+                <span className="text-sm font-semibold text-gray-700 group-hover:text-[#61DAFB] transition-colors">React</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-10 h-10 bg-[#3178C6] rounded flex items-center justify-center text-white font-bold text-sm">TS</div>
-                <span className="text-xs font-semibold text-gray-800">TypeScript</span>
+
+              <div className="group flex flex-col items-center gap-3 p-4 w-32 rounded-2xl hover:bg-white hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-blue-50">
+                <div className="w-14 h-14 bg-[#3178C6] rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-md group-hover:scale-110 group-hover:shadow-[#3178C6]/30 transition-all duration-300">TS</div>
+                <span className="text-sm font-semibold text-gray-700 group-hover:text-[#3178C6] transition-colors">TypeScript</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
-                <svg className="w-10 h-10 text-[#38B2AC]" viewBox="0 0 64 64" fill="currentColor">
-                   <path d="M32 15c-7 0-11 5-11 11s5.5 11 11 11c5.5 0 8-2.5 10.5-5.5 2-2.5 4-5.5 8.5-5.5 7 0 11 5 11 11s-5.5 11-11 11c-5.5 0-8-2.5-10.5-5.5C36.5 28 34.5 25 30 25c-7 0-11 5-11 11s5.5 11 11 11c5.5 0 8-2.5 10.5-5.5C42.5 39 44.5 42 49 42c7 0 11-5 11-11s-5.5-11-11-11c-5.5 0-8 2.5-10.5 5.5C36.5 28 34.5 25 30 25z"/>
-                </svg>
-                <span className="text-xs font-semibold text-gray-800">Tailwind CSS</span>
+
+              <div className="group flex flex-col items-center gap-3 p-4 w-32 rounded-2xl hover:bg-white hover:shadow-xl hover:shadow-teal-500/10 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-teal-50">
+                <div className="w-14 h-14 flex items-center justify-center text-[#38B2AC] group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(56,178,172,0.5)] transition-all duration-300">
+                  <svg viewBox="0 0 64 64" fill="currentColor" className="w-full h-full">
+                     <path d="M32 15c-7 0-11 5-11 11s5.5 11 11 11c5.5 0 8-2.5 10.5-5.5 2-2.5 4-5.5 8.5-5.5 7 0 11 5 11 11s-5.5 11-11 11c-5.5 0-8-2.5-10.5-5.5C36.5 28 34.5 25 30 25c-7 0-11 5-11 11s5.5 11 11 11c5.5 0 8-2.5 10.5-5.5C42.5 39 44.5 42 49 42c7 0 11-5 11-11s-5.5-11-11-11c-5.5 0-8 2.5-10.5 5.5C36.5 28 34.5 25 30 25z"/>
+                  </svg>
+                </div>
+                <span className="text-sm font-semibold text-gray-700 group-hover:text-[#38B2AC] transition-colors">Tailwind CSS</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-10 h-10 text-[#2D3748] flex justify-center items-center">
+
+              <div className="group flex flex-col items-center gap-3 p-4 w-32 rounded-2xl hover:bg-white hover:shadow-xl hover:shadow-slate-500/10 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-slate-100">
+                <div className="w-14 h-14 text-[#2D3748] flex justify-center items-center group-hover:scale-110 transition-transform duration-300">
                   <svg viewBox="0 0 48 48" fill="currentColor" className="w-full h-full"><path d="M11.9 44l22.2-12L24 4z"></path></svg>
                 </div>
-                <span className="text-xs font-semibold text-gray-800">Prisma ORM</span>
+                <span className="text-sm font-semibold text-gray-700 group-hover:text-[#2D3748] transition-colors">Prisma ORM</span>
               </div>
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-10 h-10 flex justify-center items-center text-black">
-                   <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8"><path d="M12 2L24 22H0L12 2Z"/></svg>
+
+              <div className="group flex flex-col items-center gap-3 p-4 w-32 rounded-2xl hover:bg-white hover:shadow-xl hover:shadow-black/5 hover:-translate-y-2 transition-all duration-300 border border-transparent hover:border-gray-100">
+                <div className="w-14 h-14 flex justify-center items-center text-black group-hover:scale-110 transition-transform duration-300">
+                   <svg viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10"><path d="M12 2L24 22H0L12 2Z"/></svg>
                 </div>
-                <span className="text-xs font-semibold text-gray-800">Vercel</span>
+                <span className="text-sm font-semibold text-gray-700 group-hover:text-black transition-colors">Vercel Hosting</span>
               </div>
+
             </div>
           </div>
         </section>
