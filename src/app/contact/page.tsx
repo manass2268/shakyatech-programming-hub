@@ -11,6 +11,9 @@ import {
 export default function ContactPage() {
   const [isDevModalOpen, setIsDevModalOpen] = useState(false);
   
+  // ==========================================
+  // 1. Institute Form States & Logic (Student Enquiry)
+  // ==========================================
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [instName, setInstName] = useState('');
   const [instPhone, setInstPhone] = useState('');
@@ -31,12 +34,12 @@ export default function ContactPage() {
         },
         body: JSON.stringify({
           Name: instName,
-          Email: instEmail,
+          email: instEmail, // Chhota 'e' zaroori hai auto-reply ke liye
           Phone: instPhone,
           Course_Interested: instCourse || 'General Enquiry',
           Message: instMessage,
           _subject: `🎓 New Student Enquiry from ${instName} - ShakyaTech`,
-          _autoresponse: `Hello ${instName},\n\nThank you for reaching out to ShakyaTech Programming Hub!\n\nWe have successfully received your inquiry regarding ${instCourse || 'our courses'}. Our counseling team will review your details and get back to you shortly to assist you further.\n\nKeep Learning, Keep Growing!\n\nBest Regards,\nShakyaTech Team\nshakyaashwani906@gmail.com`
+          _autoresponse: `Hello ${instName},\n\nThank you for reaching out to ShakyaTech Programming Hub!\n\nWe have successfully received your inquiry. Our counseling team will review your details and get back to you shortly to assist you further.\n\nKeep Learning, Keep Growing!\n\nBest Regards,\nShakyaTech Team\nshakyaashwani906@gmail.com`
         }),
       });
     } catch (error) {
@@ -55,6 +58,9 @@ export default function ContactPage() {
     }, 5000);
   };
 
+  // ==========================================
+  // 2. Developer Form States & Logic (Business/Error)
+  // ==========================================
   const [devFormStatus, setDevFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [devName, setDevName] = useState('');
   const [devPhone, setDevPhone] = useState('');
@@ -71,6 +77,7 @@ export default function ContactPage() {
       : `🚀 New Business/Project Inquiry from ${devName}`;
 
     try {
+      // Primary email apka, CC me support email
       await fetch("https://formsubmit.co/ajax/manassingh1509@gmail.com", {
         method: "POST",
         headers: {
@@ -79,7 +86,7 @@ export default function ContactPage() {
         },
         body: JSON.stringify({
           Name: devName,
-          Email: devEmail,
+          email: devEmail, // Chhota 'e' zaroori hai auto-reply ke liye
           Phone: devPhone,
           Purpose: devPurpose === 'error' ? 'Reporting a Website Bug/Error' : 'New Project/Business Proposal',
           Details: devDetails,
@@ -116,11 +123,9 @@ export default function ContactPage() {
         </div>
 
         <div className="container mx-auto px-4 relative z-10 text-center">
-          {/* FIX: Apostrophe replaced with &apos; */}
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
             Let&apos;s Start a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-yellow-400">Conversation</span>
           </h1>
-          {/* FIX: Apostrophe replaced with &apos; */}
           <p className="text-gray-300 max-w-2xl mx-auto text-lg md:text-xl font-medium">
             Whether you&apos;re looking to enroll in our masterclasses or need technical support, our team is ready to assist you.
           </p>

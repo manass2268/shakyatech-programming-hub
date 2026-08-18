@@ -32,7 +32,7 @@ export default function SupportWidget() {
         },
         body: JSON.stringify({
           Name: name,
-          Email: email,
+          email: email, // Chhota 'e' zaroori hai auto-reply ke liye
           Phone: phone,
           Category: purpose,
           Message: details,
@@ -72,7 +72,7 @@ export default function SupportWidget() {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+        <div className="fixed inset0 z-[100] flex items-center justify-center p-4 sm:p-6">
           <div 
             className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300"
             onClick={() => setIsOpen(false)}
