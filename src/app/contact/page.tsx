@@ -11,9 +11,6 @@ import {
 export default function ContactPage() {
   const [isDevModalOpen, setIsDevModalOpen] = useState(false);
   
-  // ==========================================
-  // 1. Institute Form States & Logic (Student Enquiry)
-  // ==========================================
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [instName, setInstName] = useState('');
   const [instPhone, setInstPhone] = useState('');
@@ -39,7 +36,6 @@ export default function ContactPage() {
           Course_Interested: instCourse || 'General Enquiry',
           Message: instMessage,
           _subject: `🎓 New Student Enquiry from ${instName} - ShakyaTech`,
-          // INSTITUTE AUTO-REPLY ADDED HERE 👇
           _autoresponse: `Hello ${instName},\n\nThank you for reaching out to ShakyaTech Programming Hub!\n\nWe have successfully received your inquiry regarding ${instCourse || 'our courses'}. Our counseling team will review your details and get back to you shortly to assist you further.\n\nKeep Learning, Keep Growing!\n\nBest Regards,\nShakyaTech Team\nshakyaashwani906@gmail.com`
         }),
       });
@@ -59,9 +55,6 @@ export default function ContactPage() {
     }, 5000);
   };
 
-  // ==========================================
-  // 2. Developer Form States & Logic (Business/Error)
-  // ==========================================
   const [devFormStatus, setDevFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [devName, setDevName] = useState('');
   const [devPhone, setDevPhone] = useState('');
@@ -92,7 +85,6 @@ export default function ContactPage() {
           Details: devDetails,
           _subject: emailSubject,
           _cc: "support.mstech4407@gmail.com",
-          // DEVELOPER AUTO-REPLY ADDED HERE 👇
           _autoresponse: `Hello ${devName},\n\nThank you for reaching out to MS Tech Support!\n\nWe have successfully received your message regarding your ${devPurpose === 'error' ? 'website bug report' : 'project inquiry'}. Our developer team will review your details and get back to you as soon as possible.\n\nBest Regards,\nMS Tech Support Team\nsupport.mstech4407@gmail.com`
         }),
       });
@@ -124,11 +116,13 @@ export default function ContactPage() {
         </div>
 
         <div className="container mx-auto px-4 relative z-10 text-center">
+          {/* FIX: Apostrophe replaced with &apos; */}
           <h1 className="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
-            Let's Start a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-yellow-400">Conversation</span>
+            Let&apos;s Start a <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-yellow-400">Conversation</span>
           </h1>
+          {/* FIX: Apostrophe replaced with &apos; */}
           <p className="text-gray-300 max-w-2xl mx-auto text-lg md:text-xl font-medium">
-            Whether you're looking to enroll in our masterclasses or need technical support, our team is ready to assist you.
+            Whether you&apos;re looking to enroll in our masterclasses or need technical support, our team is ready to assist you.
           </p>
         </div>
       </div>

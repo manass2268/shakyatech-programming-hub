@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { MessageCircle, X, Send, AlertCircle, Rocket, Code2, CheckCircle } from 'lucide-react';
+import { MessageCircle, X, Send, AlertCircle, Code2, CheckCircle } from 'lucide-react';
 
 export default function SupportWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,7 +38,6 @@ export default function SupportWidget() {
           Message: details,
           _subject: emailSubject,
           _cc: "support.mstech4407@gmail.com",
-          // SUPPORT WIDGET AUTO-REPLY ADDED HERE 👇
           _autoresponse: `Hello ${name},\n\nThank you for reaching out to MS Tech Support!\n\nWe have successfully received your message regarding your ${purpose === 'error' ? 'website bug report' : purpose === 'business' ? 'project inquiry' : 'feedback'}. \n\nOur developer team will review your details and get back to you as soon as possible.\n\nBest Regards,\nMS Tech Support Team\nsupport.mstech4407@gmail.com`
         }),
       });
