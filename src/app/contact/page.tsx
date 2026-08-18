@@ -12,7 +12,7 @@ export default function ContactPage() {
   const [isDevModalOpen, setIsDevModalOpen] = useState(false);
   
   // ==========================================
-  // 1. Institute Form States & Logic
+  // 1. Institute Form States & Logic (Student Enquiry)
   // ==========================================
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [instName, setInstName] = useState('');
@@ -38,7 +38,9 @@ export default function ContactPage() {
           Phone: instPhone,
           Course_Interested: instCourse || 'General Enquiry',
           Message: instMessage,
-          _subject: `🎓 New Student Enquiry from ${instName} - ShakyaTech`
+          _subject: `🎓 New Student Enquiry from ${instName} - ShakyaTech`,
+          // INSTITUTE AUTO-REPLY ADDED HERE 👇
+          _autoresponse: `Hello ${instName},\n\nThank you for reaching out to ShakyaTech Programming Hub!\n\nWe have successfully received your inquiry regarding ${instCourse || 'our courses'}. Our counseling team will review your details and get back to you shortly to assist you further.\n\nKeep Learning, Keep Growing!\n\nBest Regards,\nShakyaTech Team\nshakyaashwani906@gmail.com`
         }),
       });
     } catch (error) {
@@ -58,7 +60,7 @@ export default function ContactPage() {
   };
 
   // ==========================================
-  // 2. Developer Form States & Logic
+  // 2. Developer Form States & Logic (Business/Error)
   // ==========================================
   const [devFormStatus, setDevFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [devName, setDevName] = useState('');
@@ -89,7 +91,9 @@ export default function ContactPage() {
           Purpose: devPurpose === 'error' ? 'Reporting a Website Bug/Error' : 'New Project/Business Proposal',
           Details: devDetails,
           _subject: emailSubject,
-          _cc: "support.mstech4407@gmail.com"
+          _cc: "support.mstech4407@gmail.com",
+          // DEVELOPER AUTO-REPLY ADDED HERE 👇
+          _autoresponse: `Hello ${devName},\n\nThank you for reaching out to MS Tech Support!\n\nWe have successfully received your message regarding your ${devPurpose === 'error' ? 'website bug report' : 'project inquiry'}. Our developer team will review your details and get back to you as soon as possible.\n\nBest Regards,\nMS Tech Support Team\nsupport.mstech4407@gmail.com`
         }),
       });
     } catch (error) {
