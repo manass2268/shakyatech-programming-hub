@@ -24,7 +24,6 @@ export default function SupportWidget() {
       : `💡 FEEDBACK: Website Feedback from ${name}`;
 
     try {
-      // Yahan FormSubmit use ho raha hai, direct aapko aur support mail par jayega
       await fetch("https://formsubmit.co/ajax/manassingh1509@gmail.com", {
         method: "POST",
         headers: {
@@ -38,7 +37,7 @@ export default function SupportWidget() {
           Category: purpose,
           Message: details,
           _subject: emailSubject,
-          _cc: "support.mstech4407@gmail.com" // CC to support team
+          _cc: "support.mstech4407@gmail.com"
         }),
       });
     } catch (error) {
@@ -60,21 +59,17 @@ export default function SupportWidget() {
 
   return (
     <>
-      {/* FLOATING BUTTON (Har page ke bottom-right par rahega) */}
       <button
         onClick={() => setIsOpen(true)}
         className="fixed bottom-6 right-6 z-[90] w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center shadow-2xl shadow-blue-600/40 hover:-translate-y-1 transition-all group"
         aria-label="Support & Feedback"
       >
         <MessageCircle className="w-6 h-6 group-hover:scale-110 transition-transform" />
-        
-        {/* Tooltip on hover */}
         <span className="absolute right-16 bg-gray-900 text-white text-xs font-bold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
           Support & Feedback
         </span>
       </button>
 
-      {/* GLOBAL MODAL */}
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
           <div 
