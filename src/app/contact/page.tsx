@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { 
   MapPin, Phone, Mail, Clock, Send, 
-  Sparkles, X, Code2, Rocket, ArrowRight 
+  Sparkles, X, Code2, Rocket, ArrowRight, CheckCircle 
 } from 'lucide-react';
 
 export default function ContactPage() {
@@ -17,7 +17,7 @@ export default function ContactPage() {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [instName, setInstName] = useState('');
   const [instPhone, setInstPhone] = useState('');
-  const [instEmail, setInstEmail] = useState(''); // NEW: Email State added
+  const [instEmail, setInstEmail] = useState('');
   const [instCourse, setInstCourse] = useState('');
   const [instMessage, setInstMessage] = useState('');
 
@@ -25,91 +25,83 @@ export default function ContactPage() {
     e.preventDefault();
     setFormStatus('submitting');
 
-    // WhatsApp Message Format with Email
-    const whatsappText = `Hello ShakyaTech! 🎓\n\nNew Inquiry Alert:\n\n*Student Name:* ${instName}\n*Phone:* ${instPhone}\n*Email:* ${instEmail}\n*Course Interest:* ${instCourse || 'Not Selected'}\n*Message:* ${instMessage}`;
-
-    // Email Sending via Web3Forms
     try {
-      await fetch("https://api.web3forms.com/submit", {
+      // Using FormSubmit.co - Direct to Client's Email
+      await fetch("https://formsubmit.co/ajax/shakyaashwani906@gmail.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "YOUR_INSTITUTE_WEB3FORMS_KEY", 
-          name: instName,
-          email: instEmail, // Fixed to use actual email field
-          phone: instPhone,
-          message: whatsappText,
-          subject: "🎓 New Student Inquiry - ShakyaTech"
+          Name: instName,
+          Phone: instPhone,
+          Email: instEmail,
+          Course: instCourse || 'Not Selected',
+          Message: instMessage,
+          _subject: "🎓 New Student Inquiry - ShakyaTech"
         }),
       });
     } catch (error) {
       console.error("Email sending failed:", error);
     }
 
-    // Open WhatsApp
-    const whatsappUrl = `https://wa.me/917007627081?text=${encodeURIComponent(whatsappText)}`;
-    window.open(whatsappUrl, '_blank');
-
-    // Reset Form
     setFormStatus('success');
-    setInstName('');
-    setInstPhone('');
-    setInstEmail('');
-    setInstCourse('');
-    setInstMessage('');
-    setTimeout(() => setFormStatus('idle'), 3000);
+    
+    setTimeout(() => {
+      setInstName('');
+      setInstPhone('');
+      setInstEmail('');
+      setInstCourse('');
+      setInstMessage('');
+      setFormStatus('idle');
+    }, 5000);
   };
 
   // ==========================================
   // 2. Developer Form States & Logic
   // ==========================================
-  const [devFormStatus, setDevFormStatus] = useState<'idle' | 'submitting'>('idle');
+  const [devFormStatus, setDevFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [devName, setDevName] = useState('');
-  const [devPhone, setDevPhone] = useState(''); // NEW: Separate Phone State
-  const [devEmail, setDevEmail] = useState(''); // NEW: Separate Email State
+  const [devPhone, setDevPhone] = useState('');
+  const [devEmail, setDevEmail] = useState('');
   const [devDetails, setDevDetails] = useState('');
 
   const handleDevSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setDevFormStatus('submitting');
-
-    // WhatsApp Message Format with Email
-    const whatsappMessage = `Hello Manas! 🚀\n\nI am reaching out regarding a new project.\n\n*Name:* ${devName}\n*Phone:* ${devPhone}\n*Email:* ${devEmail}\n*Project Requirements:* ${devDetails}`;
     
     try {
-      await fetch("https://api.web3forms.com/submit", {
+      // Using FormSubmit.co - Direct to Developer's Email + CC to Support
+      await fetch("https://formsubmit.co/ajax/manassingh1509@gmail.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "YOUR_DEVELOPER_WEB3FORMS_KEY", 
-          name: devName,
-          email: devEmail, // Fixed to use actual email field
-          phone: devPhone,
-          message: whatsappMessage,
-          subject: "🚀 New Project Inquiry from Website"
+          Name: devName,
+          Phone: devPhone,
+          Email: devEmail,
+          ProjectDetails: devDetails,
+          _subject: "🚀 New Project Inquiry from Website",
+          _cc: "support.mstech4407@gmail.com" // CC Added Here
         }),
       });
     } catch (error) {
       console.error("Email sending failed:", error);
     }
 
-    // Open WhatsApp
-    const whatsappUrl = `https://wa.me/916307331991?text=${encodeURIComponent(whatsappMessage)}`;
-    window.open(whatsappUrl, '_blank');
-
-    // Reset Form
-    setDevFormStatus('idle');
-    setDevName('');
-    setDevPhone('');
-    setDevEmail('');
-    setDevDetails('');
-    setIsDevModalOpen(false);
+    setDevFormStatus('success');
+    
+    setTimeout(() => {
+      setDevName('');
+      setDevPhone('');
+      setDevEmail('');
+      setDevDetails('');
+      setDevFormStatus('idle');
+      setIsDevModalOpen(false); 
+    }, 4000);
   };
 
   return (
@@ -160,7 +152,7 @@ export default function ContactPage() {
                   <div>
                     <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-1.5">Phone & WhatsApp</h4>
                     <a href="tel:+917007627081" className="text-gray-800 font-semibold hover:text-blue-600 transition-colors block text-lg">+91 70076 27081</a>
-                    <a href="https://wa.me/917007627081" className="text-sm text-green-600 font-bold hover:underline mt-0.5 inline-block">Available 24/7 on Chat</a>
+                    <p className="text-sm text-green-600 font-bold mt-0.5">Available for direct calls</p>
                   </div>
                 </div>
 
@@ -190,85 +182,64 @@ export default function ContactPage() {
 
           {/* Institute Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-xl shadow-blue-900/5 border border-gray-100 h-full flex flex-col">
+            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-xl shadow-blue-900/5 border border-gray-100 h-full flex flex-col relative overflow-hidden">
               <div className="mb-8">
                 <h3 className="text-2xl font-bold text-[#081839] mb-2">Send an Inquiry</h3>
                 <p className="text-gray-500">Fill out the form below and our counseling team will get back to you.</p>
               </div>
               
-              <form onSubmit={handleInstituteSubmit} className="space-y-6 flex-grow flex flex-col">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700">Full Name *</label>
-                    <input 
-                      type="text" 
-                      value={instName}
-                      onChange={(e) => setInstName(e.target.value)}
-                      className="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50/50 hover:bg-gray-50" 
-                      placeholder="Enter your name" 
-                      required 
-                    />
+              {/* Form Success State */}
+              {formStatus === 'success' ? (
+                <div className="flex-grow flex flex-col items-center justify-center text-center animate-in fade-in duration-500">
+                  <div className="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-6">
+                    <CheckCircle className="w-10 h-10" />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700">Phone Number *</label>
-                    <input 
-                      type="tel" 
-                      value={instPhone}
-                      onChange={(e) => setInstPhone(e.target.value)}
-                      className="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50/50 hover:bg-gray-50" 
-                      placeholder="Enter mobile number" 
-                      required 
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700">Email Address *</label>
-                    <input 
-                      type="email" 
-                      value={instEmail}
-                      onChange={(e) => setInstEmail(e.target.value)}
-                      className="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50/50 hover:bg-gray-50" 
-                      placeholder="Enter email address" 
-                      required 
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-bold text-gray-700">Select Course</label>
-                    <select 
-                      value={instCourse}
-                      onChange={(e) => setInstCourse(e.target.value)}
-                      className="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-700 cursor-pointer appearance-none"
-                    >
-                      <option value="">Choose a program...</option>
-                      <option value="New Admission">New Admission</option>
-                      <option value="C / C++ Programming">C / C++ Programming</option>
-                      <option value="Java Masterclass">Java Masterclass</option>
-                      <option value="Python Course">Python Course</option>
-                    </select>
-                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Inquiry Registered!</h3>
+                  <p className="text-gray-500 max-w-sm">Thank you for reaching out. We have received your details and our team will contact you shortly.</p>
                 </div>
+              ) : (
+                <form onSubmit={handleInstituteSubmit} className="space-y-6 flex-grow flex flex-col">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-gray-700">Full Name *</label>
+                      <input type="text" value={instName} onChange={(e) => setInstName(e.target.value)} className="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50/50 hover:bg-gray-50" placeholder="Enter your name" required />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-gray-700">Phone Number *</label>
+                      <input type="tel" value={instPhone} onChange={(e) => setInstPhone(e.target.value)} className="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50/50 hover:bg-gray-50" placeholder="Enter mobile number" required />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-gray-700">Email Address *</label>
+                      <input type="email" value={instEmail} onChange={(e) => setInstEmail(e.target.value)} className="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50/50 hover:bg-gray-50" placeholder="Enter email address" required />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-bold text-gray-700">Select Course</label>
+                      <select value={instCourse} onChange={(e) => setInstCourse(e.target.value)} className="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50/50 hover:bg-gray-50 text-gray-700 cursor-pointer appearance-none">
+                        <option value="">Choose a program...</option>
+                        <option value="New Admission">New Admission</option>
+                        <option value="C / C++ Programming">C / C++ Programming</option>
+                        <option value="Java Masterclass">Java Masterclass</option>
+                        <option value="Python Course">Python Course</option>
+                      </select>
+                    </div>
+                  </div>
 
-                <div className="space-y-2 flex-grow">
-                  <label className="text-sm font-bold text-gray-700">Your Message</label>
-                  <textarea 
-                    rows={4} 
-                    value={instMessage}
-                    onChange={(e) => setInstMessage(e.target.value)}
-                    className="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50/50 hover:bg-gray-50 resize-none h-[120px]" 
-                    placeholder="How can we help you?" 
-                    required
-                  ></textarea>
-                </div>
+                  <div className="space-y-2 flex-grow">
+                    <label className="text-sm font-bold text-gray-700">Your Message</label>
+                    <textarea rows={4} value={instMessage} onChange={(e) => setInstMessage(e.target.value)} className="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all bg-gray-50/50 hover:bg-gray-50 resize-none h-[120px]" placeholder="How can we help you?" required></textarea>
+                  </div>
 
-                <button 
-                  type="submit" 
-                  disabled={formStatus === 'submitting'}
-                  className={`w-full bg-[#081839] text-white font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 mt-auto ${formStatus === 'submitting' ? 'opacity-80' : 'hover:bg-blue-900'}`}
-                >
-                  {formStatus === 'submitting' ? 'Connecting...' : formStatus === 'success' ? 'Redirecting to WhatsApp...' : (
-                    <>Submit Inquiry <Send className="w-4 h-4 ml-1" /></>
-                  )}
-                </button>
-              </form>
+                  <button 
+                    type="submit" 
+                    disabled={formStatus === 'submitting'}
+                    className={`w-full bg-[#081839] text-white font-bold py-4 rounded-xl transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2 mt-auto ${formStatus === 'submitting' ? 'opacity-80' : 'hover:bg-blue-900'}`}
+                  >
+                    {formStatus === 'submitting' ? 'Submitting Details...' : (
+                      <>Submit Inquiry <Send className="w-4 h-4 ml-1" /></>
+                    )}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
@@ -340,85 +311,65 @@ export default function ContactPage() {
             </div>
 
             <div className="p-6 sm:p-8">
-              <div className="mb-6 bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-100">
-                <p className="text-gray-600 text-sm leading-relaxed font-medium mb-4">
-                  Looking to build a scalable web application or a custom EdTech platform? Fill out the project brief below, and I will get back to you with a professional consultation and quote.
-                </p>
-                
-                <div className="flex items-center justify-between pt-4 border-t border-gray-200 mt-4">
-                  <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Connect directly</span>
-                  <a 
-                    href="https://www.linkedin.com/in/manas-singh-84326b226/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-[#0A66C2] hover:bg-[#004182] text-white text-sm font-bold rounded-lg transition-colors shadow-sm"
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                    LinkedIn
-                  </a>
+              {devFormStatus === 'success' ? (
+                <div className="py-8 flex flex-col items-center text-center animate-in fade-in duration-500">
+                  <div className="w-16 h-16 bg-green-100 text-green-500 rounded-full flex items-center justify-center mb-4">
+                    <CheckCircle className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">Request Submitted!</h3>
+                  <p className="text-sm text-gray-500">I have received your project details and will be in touch shortly.</p>
                 </div>
-              </div>
+              ) : (
+                <>
+                  <div className="mb-6 bg-gray-50 p-4 sm:p-5 rounded-2xl border border-gray-100">
+                    <p className="text-gray-600 text-sm leading-relaxed font-medium mb-4">
+                      Looking to build a scalable web application or a custom EdTech platform? Fill out the project brief below, and I will get back to you with a professional consultation and quote.
+                    </p>
+                    
+                    <div className="flex items-center justify-between pt-4 border-t border-gray-200 mt-4">
+                      <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Connect directly</span>
+                      <a 
+                        href="https://www.linkedin.com/in/manas-singh-84326b226/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-4 py-2 bg-[#0A66C2] hover:bg-[#004182] text-white text-sm font-bold rounded-lg transition-colors shadow-sm"
+                      >
+                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                        LinkedIn
+                      </a>
+                    </div>
+                  </div>
 
-              <form className="space-y-4" onSubmit={handleDevSubmit}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-gray-500 uppercase ml-1">Your Name</label>
-                    <input 
-                      type="text" 
-                      value={devName}
-                      onChange={(e) => setDevName(e.target.value)}
-                      placeholder="e.g. John Doe" 
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-gray-50/50 focus:bg-white transition-colors" 
-                      required
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-gray-500 uppercase ml-1">Phone Number</label>
-                    <input 
-                      type="tel" 
-                      value={devPhone}
-                      onChange={(e) => setDevPhone(e.target.value)}
-                      placeholder="+91..." 
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-gray-50/50 focus:bg-white transition-colors" 
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-gray-500 uppercase ml-1">Email Address</label>
-                  <input 
-                    type="email" 
-                    value={devEmail}
-                    onChange={(e) => setDevEmail(e.target.value)}
-                    placeholder="Enter your email address" 
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-gray-50/50 focus:bg-white transition-colors" 
-                    required
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-gray-500 uppercase ml-1">Project Details</label>
-                  <textarea 
-                    rows={3} 
-                    value={devDetails}
-                    onChange={(e) => setDevDetails(e.target.value)}
-                    placeholder="Briefly describe your requirements..." 
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-gray-50/50 focus:bg-white resize-none transition-colors" 
-                    required
-                  ></textarea>
-                </div>
-                
-                <button 
-                  type="submit" 
-                  disabled={devFormStatus === 'submitting'}
-                  className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/20 text-sm mt-2 flex items-center justify-center gap-2 ${devFormStatus === 'submitting' ? 'opacity-80' : ''}`}
-                >
-                  {devFormStatus === 'submitting' ? 'Connecting...' : (
-                    <>Send Project Request <ArrowRight className="w-4 h-4" /></>
-                  )}
-                </button>
-              </form>
+                  <form className="space-y-4" onSubmit={handleDevSubmit}>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-gray-500 uppercase ml-1">Your Name</label>
+                        <input type="text" value={devName} onChange={(e) => setDevName(e.target.value)} placeholder="e.g. John Doe" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-gray-50/50 focus:bg-white transition-colors" required />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-xs font-bold text-gray-500 uppercase ml-1">Phone Number</label>
+                        <input type="tel" value={devPhone} onChange={(e) => setDevPhone(e.target.value)} placeholder="+91..." className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-gray-50/50 focus:bg-white transition-colors" required />
+                      </div>
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-gray-500 uppercase ml-1">Email Address</label>
+                      <input type="email" value={devEmail} onChange={(e) => setDevEmail(e.target.value)} placeholder="Enter your email address" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-gray-50/50 focus:bg-white transition-colors" required />
+                    </div>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-bold text-gray-500 uppercase ml-1">Project Details</label>
+                      <textarea rows={3} value={devDetails} onChange={(e) => setDevDetails(e.target.value)} placeholder="Briefly describe your requirements..." className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-gray-50/50 focus:bg-white resize-none transition-colors" required></textarea>
+                    </div>
+                    
+                    <button type="submit" disabled={devFormStatus === 'submitting'} className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/20 text-sm mt-2 flex items-center justify-center gap-2 ${devFormStatus === 'submitting' ? 'opacity-80' : ''}`}>
+                      {devFormStatus === 'submitting' ? 'Sending Details...' : (
+                        <>Send Project Request <ArrowRight className="w-4 h-4" /></>
+                      )}
+                    </button>
+                  </form>
+                </>
+              )}
             </div>
 
           </div>

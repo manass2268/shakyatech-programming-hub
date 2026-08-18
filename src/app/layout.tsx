@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+// Ye line naye widget ko import karne ke liye add ki hai 👇
+import SupportWidget from "@/components/SupportWidget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +35,9 @@ export default function RootLayout({
         <div className="flex flex-col min-h-screen w-full max-w-[100vw] overflow-x-hidden">
           {children}
         </div>
+
+        {/* GLOBAL SUPPORT WIDGET: Yeh poori website par bottom-right mein floating dikhega */}
+        <SupportWidget />
       </body>
     </html>
   );
