@@ -358,13 +358,8 @@ export default function ContactPage() {
                       {devPurpose === 'error' ? 'Describe the Error/Bug' : 'Project Details'}
                     </label>
                     <textarea 
-                      rows={3} 
-                      value={details} 
-                      onChange={(e) => setDevDetails(e.target.value)} 
-                      placeholder={devPurpose === 'error' ? "Which page has the error? What happened?" : "Briefly describe your requirements..."} 
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-gray-50/50 focus:bg-white resize-none transition-colors" 
-                      required
-                    ></textarea>
+                      rows={3} value={devDetails} onChange={(e) => setDevDetails(e.target.value)} placeholder={devPurpose === 'error' ? "Which page has the error? What happened?" : "Briefly describe your requirements..."} className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-600 text-sm bg-gray-50/50 focus:bg-white resize-none transition-colors" required>
+                    </textarea>
                   </div>
                   
                   <button type="submit" disabled={devFormStatus === 'submitting'} className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-600/20 text-sm mt-2 flex items-center justify-center gap-2 ${devFormStatus === 'submitting' ? 'opacity-80' : ''}`}>
