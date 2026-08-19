@@ -22,9 +22,10 @@ export default function Navbar() {
   return (
     <div className="w-full font-sans shadow-md relative">
       
-      {/* Top Bar */}
+      {/* Top Bar - Ultra Wide Ready */}
       <div className="hidden bg-[#081839] text-gray-300 text-[11px] py-2">
-        <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
+        {/* Changed max-w-7xl to max-w-[1920px] and added 2xl:px-16 */}
+        <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-16 flex justify-between items-center">
           <div className="flex gap-3 items-center">
             <span className="text-yellow-500 font-semibold">🎓 Admissions Open 2026-27</span>
             <span className="text-gray-500">|</span>
@@ -37,37 +38,38 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Main Header */}
+      {/* Main Header - Ultra Wide Ready */}
       <header className="bg-white sticky top-0 z-50 w-full overflow-visible">
-        <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 lg:py-4 flex justify-between items-center">
+        {/* Changed max-w-7xl to max-w-[1920px] and added 2xl:px-16 */}
+        <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-16 py-3 lg:py-4 flex justify-between items-center">
           
           {/* Logo Section */}
-          <Link href="/" className="flex items-center gap-2 lg:gap-3 flex-shrink-0 flex-1 justify-start group cursor-pointer">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 relative flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+          <Link href="/" className="flex items-center gap-2 lg:gap-3 2xl:gap-4 shrink-0 justify-start group cursor-pointer">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 2xl:w-14 2xl:h-14 relative flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
               <Image 
                 src="/logo.jpeg" 
                 alt="Shakya Tech Logo" 
-                width={48} 
-                height={48} 
+                width={56} 
+                height={56} 
                 className="object-contain"
               />
             </div>
             
             <div className="leading-tight flex flex-col justify-center min-w-max">
-              <span className="text-base sm:text-lg lg:text-xl font-extrabold text-[#081839] tracking-wide uppercase group-hover:text-blue-700 transition-colors duration-300">
+              <span className="text-base sm:text-lg lg:text-xl 2xl:text-2xl font-extrabold text-[#081839] tracking-wide uppercase group-hover:text-blue-700 transition-colors duration-300 whitespace-nowrap">
                 SHAKYA TECH
               </span>
-              <span className="text-[10px] sm:text-[11px] lg:text-[12px] font-bold text-[#081839] tracking-wide uppercase mt-[1px]">
+              <span className="text-[10px] sm:text-[11px] lg:text-[12px] 2xl:text-[13px] font-bold text-[#081839] tracking-wide uppercase mt-[1px] whitespace-nowrap">
                 PROGRAMMING HUB
               </span>
-              <p className="text-[8px] sm:text-[9px] text-gray-500 font-medium mt-0.5">
+              <p className="text-[8px] sm:text-[9px] 2xl:text-[10px] text-gray-500 font-medium mt-0.5 whitespace-nowrap">
                 Learn. Practice. Grow.
               </p>
             </div>
           </Link>
           
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center justify-center space-x-5 xl:space-x-8 text-[14px] xl:text-[15px] font-bold text-[#081839] flex-shrink-0">
+          {/* Desktop Navigation - Added 2xl:space-x-12 for ultra-wide spreading */}
+          <nav className="hidden lg:flex items-center justify-center space-x-5 xl:space-x-8 2xl:space-x-12 text-[14px] xl:text-[15px] 2xl:text-[16px] font-bold text-[#081839] shrink-0">
             
             <Link href="/" className={`relative group whitespace-nowrap py-1 ${isActive('/') ? 'text-blue-600' : ''}`}>
               <span className="group-hover:text-blue-600 transition-colors duration-300">Home</span>
@@ -92,7 +94,6 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* NAYA LINK: Watch Free */}
             <Link href="/#watch-free" className="relative group whitespace-nowrap py-1">
               <span className="group-hover:text-blue-600 transition-colors duration-300 flex items-center gap-1">
                 <span className="text-red-500">▶</span> Watch Free
@@ -135,8 +136,9 @@ export default function Navbar() {
           </nav>
 
           {/* Action Buttons */}
-          <div className="flex items-center justify-end gap-3 flex-shrink-0 flex-1">
-            <button className="hidden sm:block bg-[#081839] hover:bg-blue-800 text-white px-5 xl:px-7 py-2.5 rounded font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm text-sm whitespace-nowrap">
+          <div className="flex items-center justify-end gap-3 shrink-0">
+            {/* Added 2xl sizing for the button */}
+            <button className="hidden sm:block bg-[#081839] hover:bg-blue-800 text-white px-5 xl:px-7 2xl:px-8 py-2.5 2xl:py-3 rounded font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm text-sm 2xl:text-base whitespace-nowrap">
               Apply Now
             </button>
             
@@ -178,7 +180,6 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* NAYA LINK (Mobile): Watch Free */}
           <Link href="/#watch-free" onClick={() => setIsMobileMenuOpen(false)} className="hover:text-blue-600 transition-all duration-300 py-3 border-b border-gray-100 flex w-full hover:translate-x-2 items-center gap-2">
             <span className="text-red-500">▶</span> Watch Free
           </Link>

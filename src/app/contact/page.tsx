@@ -33,12 +33,13 @@ export default function ContactPage() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          Name: instName,
-          email: instEmail, // Chhota 'e' zaroori hai auto-reply ke liye
-          Phone: instPhone,
-          Course_Interested: instCourse || 'General Enquiry',
-          Message: instMessage,
+          name: instName,
+          email: instEmail,
+          phone: instPhone,
+          course_interested: instCourse || 'General Enquiry',
+          message: instMessage,
           _subject: `🎓 New Student Enquiry from ${instName} - ShakyaTech`,
+          _replyto: instEmail, // Force reply to user's email
           _autoresponse: `Hello ${instName},\n\nThank you for reaching out to ShakyaTech Programming Hub!\n\nWe have successfully received your inquiry. Our counseling team will review your details and get back to you shortly to assist you further.\n\nKeep Learning, Keep Growing!\n\nBest Regards,\nShakyaTech Team\nshakyaashwani906@gmail.com`
         }),
       });
@@ -77,7 +78,6 @@ export default function ContactPage() {
       : `🚀 New Business/Project Inquiry from ${devName}`;
 
     try {
-      // Primary email apka, CC me support email
       await fetch("https://formsubmit.co/ajax/manassingh1509@gmail.com", {
         method: "POST",
         headers: {
@@ -85,13 +85,14 @@ export default function ContactPage() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          Name: devName,
-          email: devEmail, // Chhota 'e' zaroori hai auto-reply ke liye
-          Phone: devPhone,
-          Purpose: devPurpose === 'error' ? 'Reporting a Website Bug/Error' : 'New Project/Business Proposal',
-          Details: devDetails,
+          name: devName,
+          email: devEmail,
+          phone: devPhone,
+          purpose: devPurpose === 'error' ? 'Reporting a Website Bug/Error' : 'New Project/Business Proposal',
+          message: devDetails,
           _subject: emailSubject,
           _cc: "support.mstech4407@gmail.com",
+          _replyto: devEmail, // Force reply to user's email
           _autoresponse: `Hello ${devName},\n\nThank you for reaching out to MS Tech Support!\n\nWe have successfully received your message regarding your ${devPurpose === 'error' ? 'website bug report' : 'project inquiry'}. Our developer team will review your details and get back to you as soon as possible.\n\nBest Regards,\nMS Tech Support Team\nsupport.mstech4407@gmail.com`
         }),
       });

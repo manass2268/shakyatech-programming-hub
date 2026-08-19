@@ -31,13 +31,14 @@ export default function SupportWidget() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          Name: name,
-          email: email, // Chhota 'e' zaroori hai auto-reply ke liye
-          Phone: phone,
-          Category: purpose,
-          Message: details,
+          name: name,
+          email: email,
+          phone: phone,
+          purpose: purpose,
+          message: details,
           _subject: emailSubject,
           _cc: "support.mstech4407@gmail.com",
+          _replyto: email, // Force reply to user's email
           _autoresponse: `Hello ${name},\n\nThank you for reaching out to MS Tech Support!\n\nWe have successfully received your message regarding your ${purpose === 'error' ? 'website bug report' : purpose === 'business' ? 'project inquiry' : 'feedback'}. \n\nOur developer team will review your details and get back to you as soon as possible.\n\nBest Regards,\nMS Tech Support Team\nsupport.mstech4407@gmail.com`
         }),
       });
@@ -72,7 +73,7 @@ export default function SupportWidget() {
       </button>
 
       {isOpen && (
-        <div className="fixed inset0 z-[100] flex items-center justify-center p-4 sm:p-6">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
           <div 
             className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300"
             onClick={() => setIsOpen(false)}
