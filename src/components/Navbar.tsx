@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -30,8 +31,8 @@ export default function Navbar() {
             <span>Build Your Skills. Build Your Future.</span>
           </div>
           <div className="flex gap-5 items-center">
-            <span className="flex items-center gap-1 hover:text-white cursor-pointer transition-colors">📞 +91 00000 00000</span>
-            <span className="flex items-center gap-1 hover:text-white cursor-pointer transition-colors">✉️ info@demo-academy.com</span>
+            <span className="flex items-center gap-1 hover:text-white cursor-pointer transition-colors">📞 +91 70076 27081</span>
+            <span className="flex items-center gap-1 hover:text-white cursor-pointer transition-colors">✉️ shakyaashwani906@gmail.com</span>
           </div>
         </div>
       </div>
@@ -40,14 +41,24 @@ export default function Navbar() {
       <header className="bg-white sticky top-0 z-50 w-full overflow-visible">
         <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-16 py-3 lg:py-4 flex justify-between items-center">
           
-          {/* Logo Section (Text Only) */}
+          {/* Logo Section */}
           <Link href="/" className="flex items-center gap-2 lg:gap-3 2xl:gap-4 shrink-0 justify-start group cursor-pointer">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 2xl:w-14 2xl:h-14 relative flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
+              <Image 
+                src="/logo.jpeg" 
+                alt="Shakya Tech Logo" 
+                width={56} 
+                height={56} 
+                className="object-contain"
+              />
+            </div>
+            
             <div className="leading-tight flex flex-col justify-center min-w-max">
               <span className="text-base sm:text-lg lg:text-xl 2xl:text-2xl font-extrabold text-[#081839] tracking-wide uppercase group-hover:text-blue-700 transition-colors duration-300 whitespace-nowrap">
-                DEMO ACADEMY
+                SHAKYA TECH
               </span>
               <span className="text-[10px] sm:text-[11px] lg:text-[12px] 2xl:text-[13px] font-bold text-[#081839] tracking-wide uppercase mt-[1px] whitespace-nowrap">
-                LEARNING PLATFORM
+                PROGRAMMING HUB
               </span>
               <p className="text-[8px] sm:text-[9px] 2xl:text-[10px] text-gray-500 font-medium mt-0.5 whitespace-nowrap">
                 Learn. Practice. Grow.
