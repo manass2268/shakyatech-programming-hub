@@ -31,14 +31,14 @@ export default function SupportWidget() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          name: name,
-          email: email,
-          phone: phone,
-          purpose: purpose,
-          message: details,
+          name: name,           // 👈 YEH LOWERCASE HAI
+          email: email,         // 👈 YEH LOWERCASE HAI
+          phone: phone,         // 👈 YEH LOWERCASE HAI
+          purpose: purpose,     // 👈 YAHAN 'Category' KI JAGAH 'purpose' HAI
+          message: details,     // 👈 YEH LOWERCASE HAI
           _subject: emailSubject,
           _cc: "support.mstech4407@gmail.com",
-          _replyto: email, // Force reply to user's email
+          _replyto: email,
           _autoresponse: `Hello ${name},\n\nThank you for reaching out to MS Tech Support!\n\nWe have successfully received your message regarding your ${purpose === 'error' ? 'website bug report' : purpose === 'business' ? 'project inquiry' : 'feedback'}. \n\nOur developer team will review your details and get back to you as soon as possible.\n\nBest Regards,\nMS Tech Support Team\nsupport.mstech4407@gmail.com`
         }),
       });

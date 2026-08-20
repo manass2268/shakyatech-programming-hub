@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -24,7 +23,6 @@ export default function Navbar() {
       
       {/* Top Bar - Ultra Wide Ready */}
       <div className="hidden bg-[#081839] text-gray-300 text-[11px] py-2">
-        {/* Changed max-w-7xl to max-w-[1920px] and added 2xl:px-16 */}
         <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-16 flex justify-between items-center">
           <div className="flex gap-3 items-center">
             <span className="text-yellow-500 font-semibold">🎓 Admissions Open 2026-27</span>
@@ -32,35 +30,24 @@ export default function Navbar() {
             <span>Build Your Skills. Build Your Future.</span>
           </div>
           <div className="flex gap-5 items-center">
-            <span className="flex items-center gap-1 hover:text-white cursor-pointer transition-colors">📞 +91 70076 27081</span>
-            <span className="flex items-center gap-1 hover:text-white cursor-pointer transition-colors">✉️ shakyaashwani906@gmail.com</span>
+            <span className="flex items-center gap-1 hover:text-white cursor-pointer transition-colors">📞 +91 00000 00000</span>
+            <span className="flex items-center gap-1 hover:text-white cursor-pointer transition-colors">✉️ info@demo-academy.com</span>
           </div>
         </div>
       </div>
 
       {/* Main Header - Ultra Wide Ready */}
       <header className="bg-white sticky top-0 z-50 w-full overflow-visible">
-        {/* Changed max-w-7xl to max-w-[1920px] and added 2xl:px-16 */}
         <div className="w-full max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8 2xl:px-16 py-3 lg:py-4 flex justify-between items-center">
           
-          {/* Logo Section */}
+          {/* Logo Section (Text Only) */}
           <Link href="/" className="flex items-center gap-2 lg:gap-3 2xl:gap-4 shrink-0 justify-start group cursor-pointer">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 2xl:w-14 2xl:h-14 relative flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform duration-300">
-              <Image 
-                src="/logo.jpeg" 
-                alt="Shakya Tech Logo" 
-                width={56} 
-                height={56} 
-                className="object-contain"
-              />
-            </div>
-            
             <div className="leading-tight flex flex-col justify-center min-w-max">
               <span className="text-base sm:text-lg lg:text-xl 2xl:text-2xl font-extrabold text-[#081839] tracking-wide uppercase group-hover:text-blue-700 transition-colors duration-300 whitespace-nowrap">
-                SHAKYA TECH
+                DEMO ACADEMY
               </span>
               <span className="text-[10px] sm:text-[11px] lg:text-[12px] 2xl:text-[13px] font-bold text-[#081839] tracking-wide uppercase mt-[1px] whitespace-nowrap">
-                PROGRAMMING HUB
+                LEARNING PLATFORM
               </span>
               <p className="text-[8px] sm:text-[9px] 2xl:text-[10px] text-gray-500 font-medium mt-0.5 whitespace-nowrap">
                 Learn. Practice. Grow.
@@ -68,7 +55,7 @@ export default function Navbar() {
             </div>
           </Link>
           
-          {/* Desktop Navigation - Added 2xl:space-x-12 for ultra-wide spreading */}
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center justify-center space-x-5 xl:space-x-8 2xl:space-x-12 text-[14px] xl:text-[15px] 2xl:text-[16px] font-bold text-[#081839] shrink-0">
             
             <Link href="/" className={`relative group whitespace-nowrap py-1 ${isActive('/') ? 'text-blue-600' : ''}`}>
@@ -137,7 +124,6 @@ export default function Navbar() {
 
           {/* Action Buttons */}
           <div className="flex items-center justify-end gap-3 shrink-0">
-            {/* Added 2xl sizing for the button */}
             <button className="hidden sm:block bg-[#081839] hover:bg-blue-800 text-white px-5 xl:px-7 2xl:px-8 py-2.5 2xl:py-3 rounded font-semibold transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:shadow-sm text-sm 2xl:text-base whitespace-nowrap">
               Apply Now
             </button>
