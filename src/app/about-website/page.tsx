@@ -228,7 +228,7 @@ export default function AboutWebsite() {
           </div>
         </section>
 
-        {/* DEV & CONNECT SPLIT */}
+        {/* DEV & CONNECT SPLIT - RESTORED MANAS SINGH'S DETAILS */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4 max-w-7xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
