@@ -3,7 +3,8 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import FeaturesStrip from '@/components/FeaturesStrip';
 import CourseGrid from '@/components/CourseGrid';
-import FeaturedLectures from '@/components/FeaturedLectures'; // Naya component import
+import FeaturedLectures from '@/components/FeaturedLectures'; 
+import SlideshowGallery from '@/components/SlideshowGallery'; 
 import StatsStrip from '@/components/StatsStrip';
 import NewsEvents from '@/components/NewsEvents';
 import Footer from '@/components/Footer'; 
@@ -27,17 +28,22 @@ export default function Home() {
           <CourseGrid />
         </div>
 
-        {/* Position 2: Naya Watch & Learn section yahan lagaya hai */}
+        {/* Watch & Learn section */}
         <div className="css-reveal delay-400">
           <FeaturedLectures />
         </div>
 
-        {/* Baaki components ka delay thoda badha diya hai taaki scroll flow smooth rahe */}
+        {/* NAYA: Campus Gallery Slideshow yahan add kiya hai */}
         <div className="css-reveal delay-500">
+          <SlideshowGallery />
+        </div>
+
+        {/* Baaki components ka delay sequence badha diya hai */}
+        <div className="css-reveal delay-600">
           <StatsStrip />
         </div>
 
-        <div className="css-reveal delay-500">
+        <div className="css-reveal delay-700">
           <NewsEvents />
         </div>
       </main>
